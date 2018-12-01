@@ -5,3 +5,10 @@ sireata-spring-boot/.mvn/
 sireata-spring-boot/.project
 sireata-spring-boot/.settings/
 sireata-spring-boot/.vscode/
+sireata-azure-functions/target/
+sireata-azure-functions/.DS_Store
+sireata-azure-functions/.classpath
+sireata-azure-functions/.factorypath
+sireata-azure-functions/.project
+sireata-azure-functions/.settings/
+sireata-azure-functions/.vscode/
