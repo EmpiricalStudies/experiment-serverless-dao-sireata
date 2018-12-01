@@ -1,8 +1,17 @@
 package br.edu.utfpr.dv.sireata.dao.pauta;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
+import br.edu.utfpr.dv.sireata.model.Pauta;
+
 public class PautaDAOSalvar {
 
-    public int salvar(Pauta pauta) throws SQLException{
+    public int salvar(Pauta pauta) throws SQLException {
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

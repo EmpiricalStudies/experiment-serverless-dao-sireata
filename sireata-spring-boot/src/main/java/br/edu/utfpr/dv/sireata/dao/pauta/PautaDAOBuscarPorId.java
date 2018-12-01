@@ -1,7 +1,16 @@
 package br.edu.utfpr.dv.sireata.dao.pauta;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
+import br.edu.utfpr.dv.sireata.model.Pauta;
+
 public class PautaDAOBuscarPorId {
-    public Pauta buscarPorId(int id) throws SQLException{
+
+    public Pauta buscarPorId(int id) throws SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

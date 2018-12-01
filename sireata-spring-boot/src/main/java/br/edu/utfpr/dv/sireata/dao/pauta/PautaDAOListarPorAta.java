@@ -1,6 +1,17 @@
 package br.edu.utfpr.dv.sireata.dao.pauta;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
+import br.edu.utfpr.dv.sireata.model.Pauta;
+
 public class PautaDAOListarPorAta {
+	
     public List<Pauta> listarPorAta(int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
@@ -29,7 +40,7 @@ public class PautaDAOListarPorAta {
 		}
     }
     
-    private Pauta carregarObjeto(ResultSet rs) throws SQLException{
+    private Pauta carregarObjeto(ResultSet rs) throws SQLException {
 		Pauta pauta = new Pauta();
 		
 		pauta.setIdPauta(rs.getInt("idPauta"));
