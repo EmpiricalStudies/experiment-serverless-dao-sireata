@@ -8,11 +8,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.BindingName;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.model.Anexo;
 
 public class AnexoDAO {
 	
-	public Anexo buscarPorId(int id) throws SQLException{
+	@FunctionName ("funcaoanexobuscarporid")
+	public Anexo buscarPorId(
+		@HttpTrigger (
+			name = "restanexobuscarporid",
+			methods = {HttpMethod.PUT},
+			route = "anexo/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException{
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -41,7 +55,16 @@ public class AnexoDAO {
 		}
 	}
 	
-	public List<Anexo> listarPorAta(int idAta) throws SQLException{
+	@FunctionName ("funcaoanexolistarporata")
+	public List<Anexo> listarPorAta(
+		@HttpTrigger (
+			name = "restanexolistarporata",
+			methods = {HttpMethod.GET},
+			route = "anexo/{idAta}"
+		)
+		@BindingName ("idAta")
+		int idAta) throws SQLException{
+		
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -70,7 +93,14 @@ public class AnexoDAO {
 		}
 	}
 	
-	public int salvar(Anexo anexo) throws SQLException{
+	@FunctionName ("funcaoanexosalvar")
+	public int salvar(
+		@HttpTrigger (
+			name = "restanexosalvar",
+			methods = {HttpMethod.POST},
+			route = "anexo"
+		)
+		Anexo anexo) throws SQLException{
 		boolean insert = (anexo.getIdAnexo() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -115,7 +145,16 @@ public class AnexoDAO {
 		}
 	}
 	
-	public void excluir(int id) throws SQLException{
+	@FunctionName ("funcaoanexoexcluir")
+	public void excluir(
+		@HttpTrigger (
+			name = "restanexoexcluir",
+			methods = {HttpMethod.DELETE},
+			route = "excluir/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException{
+			
 		Connection conn = null;
 		Statement stmt = null;
 		

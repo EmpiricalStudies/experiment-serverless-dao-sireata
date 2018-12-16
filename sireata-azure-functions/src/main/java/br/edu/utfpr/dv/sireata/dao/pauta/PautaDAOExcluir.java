@@ -4,11 +4,25 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.BindingName;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 
 public class PautaDAOExcluir {
-    
-    public void excluir(int id) throws SQLException {
+	
+	@FunctionName ("funcaopautaexcluir")
+    public void excluir(
+		@HttpTrigger (
+			name = "restpautaexcluir",
+			methods = {HttpMethod.DELETE},
+			route = "pauta/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException {
+			
 		Connection conn = null;
 		Statement stmt = null;
 		

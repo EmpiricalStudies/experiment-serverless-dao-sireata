@@ -6,12 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class PautaDAOSalvar {
 
-    public int salvar(Pauta pauta) throws SQLException {
+	@FunctionName ("funcaopautasalvar")
+    public int salvar(
+		@HttpTrigger (
+			name = "restpautasalvar",
+			methods = {HttpMethod.POST},
+			route = "pauta"
+		)
+		Pauta pauta) throws SQLException {
+			
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

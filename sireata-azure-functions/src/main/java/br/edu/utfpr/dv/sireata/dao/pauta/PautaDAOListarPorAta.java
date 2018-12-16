@@ -7,12 +7,26 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.BindingName;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class PautaDAOListarPorAta {
 	
-    public List<Pauta> listarPorAta(int idAta) throws SQLException {
+	@FunctionName ("funcaopautalistarporata")
+    public List<Pauta> listarPorAta(
+		@HttpTrigger (
+			name = "restpautalistarporata",
+			methods = {HttpMethod.GET},
+			route = "pauta/{idAta}"
+		)
+		@BindingName ("idAta")
+		int idAta) throws SQLException {
+			
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;

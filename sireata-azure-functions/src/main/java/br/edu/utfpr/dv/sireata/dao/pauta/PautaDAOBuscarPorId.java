@@ -5,11 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.BindingName;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class PautaDAOBuscarPorId {
-    public Pauta buscarPorId(int id) throws SQLException {
+
+	@FunctionName ("funcaopautabuscarporid")
+    public Pauta buscarPorId(
+		@HttpTrigger (
+			name = "restpautabuscarporid",
+			methods = {HttpMethod.PUT},
+			route = "pauta/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException {
+			
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

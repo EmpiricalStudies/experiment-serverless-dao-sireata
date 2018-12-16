@@ -8,11 +8,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.annotation.BindingName;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+
 import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 
 public class AtaParticipanteDAO {
 	
-	public AtaParticipante buscarPorId(int id) throws SQLException{
+	@FunctionName ("funcaoataparticipantebuscarporid")
+	public AtaParticipante buscarPorId(
+		@HttpTrigger (
+			name = "restataparticipantebuscarporid",
+			methods = {HttpMethod.PUT},
+			route = "ataparticipante/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException{
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -42,7 +56,16 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public List<AtaParticipante> listarPorAta(int idAta) throws SQLException{
+	@FunctionName ("funcaoataparticipantelistarporata")
+	public List<AtaParticipante> listarPorAta(
+		@HttpTrigger (
+			name = "restataparticipantelistarporata",
+			methods = {HttpMethod.GET},
+			route = "ataparticipante/{idAta}"
+		)
+		@BindingName ("idAta")
+		int idAta) throws SQLException{
+
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -72,7 +95,15 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public int salvar(AtaParticipante participante) throws SQLException{
+	@FunctionName ("funcaoataparticipantesalvar")
+	public int salvar(
+		@HttpTrigger (
+			name = "restataparticipantesalvar",
+			methods = {HttpMethod.POST},
+			route = "ataparticipante"
+		)
+		AtaParticipante participante) throws SQLException{
+
 		boolean insert = (participante.getIdAtaParticipante() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -118,7 +149,16 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public void excluir(int id) throws SQLException{
+	@FunctionName ("funcaoataparticipanteexcluir")
+	public void excluir(
+		@HttpTrigger (
+			name = "restataparticipanteexcluir",
+			methods = {HttpMethod.DELETE},
+			route = "ataparticipante/{id}"
+		)
+		@BindingName ("id")
+		int id) throws SQLException{
+			
 		Connection conn = null;
 		Statement stmt = null;
 		
