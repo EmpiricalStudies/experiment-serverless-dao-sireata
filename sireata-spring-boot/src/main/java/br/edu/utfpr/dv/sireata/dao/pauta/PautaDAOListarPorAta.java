@@ -7,12 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
+@RestController
 public class PautaDAOListarPorAta {
 	
-    public List<Pauta> listarPorAta(int idAta) throws SQLException{
+	@GetMapping ("/pauta/{idAta}")
+    public List<Pauta> listarPorAta(@PathVariable int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;

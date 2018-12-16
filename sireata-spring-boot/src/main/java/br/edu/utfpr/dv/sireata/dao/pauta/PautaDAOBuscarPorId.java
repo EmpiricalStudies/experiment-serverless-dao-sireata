@@ -5,12 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
+@RestController
 public class PautaDAOBuscarPorId {
 
-    public Pauta buscarPorId(int id) throws SQLException {
+	@PutMapping ("/pauta/{id}")
+    public Pauta buscarPorId(@PathVariable int id) throws SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

@@ -6,12 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import br.edu.utfpr.dv.sireata.dao.ConnectionDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
+@RestController
 public class PautaDAOSalvar {
 
-    public int salvar(Pauta pauta) throws SQLException {
+	@PostMapping ("/pauta")
+    public int salvar(@RequestBody Pauta pauta) throws SQLException {
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;

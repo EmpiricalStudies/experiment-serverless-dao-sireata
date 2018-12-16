@@ -8,11 +8,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.dv.sireata.model.Anexo;
 
+@RestController
 public class AnexoDAO {
-	
-	public Anexo buscarPorId(int id) throws SQLException{
+
+	@PutMapping ("/anexo/{id}")
+	public Anexo buscarPorId(@PathVariable int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -41,7 +51,8 @@ public class AnexoDAO {
 		}
 	}
 	
-	public List<Anexo> listarPorAta(int idAta) throws SQLException{
+	@GetMapping ("/anexo/{idAta}")
+	public List<Anexo> listarPorAta(@PathVariable int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -70,7 +81,8 @@ public class AnexoDAO {
 		}
 	}
 	
-	public int salvar(Anexo anexo) throws SQLException{
+	@PostMapping ("/anexo")
+	public int salvar(@RequestBody Anexo anexo) throws SQLException{
 		boolean insert = (anexo.getIdAnexo() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -115,7 +127,8 @@ public class AnexoDAO {
 		}
 	}
 	
-	public void excluir(int id) throws SQLException{
+	@DeleteMapping ("/anexo/{id}")
+	public void excluir(@PathVariable int id) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		

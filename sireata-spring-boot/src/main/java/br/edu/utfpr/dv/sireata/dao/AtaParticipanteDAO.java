@@ -8,11 +8,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 
+@RestController
 public class AtaParticipanteDAO {
 	
-	public AtaParticipante buscarPorId(int id) throws SQLException{
+	@PutMapping ("/ataparticipante/{id}")
+	public AtaParticipante buscarPorId(@PathVariable int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -42,7 +52,8 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public List<AtaParticipante> listarPorAta(int idAta) throws SQLException{
+	@GetMapping ("/ataparticipante/{idAta}")
+	public List<AtaParticipante> listarPorAta(@PathVariable int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -72,7 +83,8 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public int salvar(AtaParticipante participante) throws SQLException{
+	@PostMapping ("/ataparticipante")
+	public int salvar(@RequestBody AtaParticipante participante) throws SQLException{
 		boolean insert = (participante.getIdAtaParticipante() == 0);
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -118,7 +130,8 @@ public class AtaParticipanteDAO {
 		}
 	}
 	
-	public void excluir(int id) throws SQLException{
+	@DeleteMapping ("/ataparticipante/{id}")
+	public void excluir(@PathVariable int id) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
 		
