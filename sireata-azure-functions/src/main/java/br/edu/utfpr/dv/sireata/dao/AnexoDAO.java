@@ -150,7 +150,7 @@ public class AnexoDAO {
 		@HttpTrigger (
 			name = "restanexoexcluir",
 			methods = {HttpMethod.DELETE},
-			route = "excluir/{id}"
+			route = "anexo/{id}"
 		)
 		@BindingName ("id")
 		int id) throws SQLException{
